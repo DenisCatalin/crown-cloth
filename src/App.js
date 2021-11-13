@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {auth, createUserProfileDocument, /*addCollectionAndDocuments*/} from './firebase/firebase.utils';
@@ -14,14 +14,11 @@ import Header from './components/header/header.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 // import { selectCollectionsForPreview } from './redux/shop/shop.selectors'
 
-class App extends React.Component {
+const App = ({ setCurrentUser, currentUser }) => {
+  
+  useEffect(() => {
 
-  unsubscriberFromAuth = null;
-
-  componentDidMount() {
-    const { setCurrentUser, /*collectionsArray*/ } = this.props;
-
-    this.unsubscriberFromAuth = auth.onAuthStateChanged(async userAuth => {
+    auth.onAuthStateChanged(async userAuth => {
       if(userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
@@ -36,23 +33,17 @@ class App extends React.Component {
 
       // addCollectionAndDocuments('collections', collectionsArray.map(obj =>({ title, items }) => ({ title, items })));
     });
-  }
+  }, [setCurrentUser]);
 
-  componentWillUnmount() {
-    this.unsubscriberFromAuth();
-  }
-
-  render() {
-    return (
-      <Router>
-        <Header />
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/signin" render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />)} />
-        <Route path="/shop" component={ShopPage} />
-        <Route exact path="/checkout" component={CheckoutPage} />
-      </Router>
-    )
-  }
+  return (
+    <Router>
+      <Header />
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/signin" render={() => currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />)} />
+      <Route path="/shop" component={ShopPage} />
+      <Route exact path="/checkout" component={CheckoutPage} />
+    </Router>
+  )
 }
 
 const mapStateToProps = createStructuredSelector({
