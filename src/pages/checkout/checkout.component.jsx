@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import './checkout.styles.scss'
+import { CheckoutPageContainer, CheckoutPageHeader, CheckoutHeaderSpacing, CheckoutPageTotal } from './checkout.styles'
 import { createStructuredSelector } from 'reselect'
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selector'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
@@ -8,34 +8,34 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button.c
 
 const CheckoutPage = ({cartItems, total}) => {
     return (
-        <div className='checkout-page'>
-            <div className="checkout-header">
-            <div className="header-block">
+        <CheckoutPageContainer>
+            <CheckoutPageHeader>
+                <CheckoutHeaderSpacing>
                     <span>Product</span>
-                </div>
-                <div className="header-block">
+                </CheckoutHeaderSpacing>
+                <CheckoutHeaderSpacing>
                     <span>Description</span>
-                </div>
-                <div className="header-block">
+                </CheckoutHeaderSpacing>
+                <CheckoutHeaderSpacing>
                     <span>Quantity</span>
-                </div>
-                <div className="header-block">
+                </CheckoutHeaderSpacing>
+                <CheckoutHeaderSpacing>
                     <span>Price</span>
-                </div>
-                <div className="header-block">
+                </CheckoutHeaderSpacing>
+                <CheckoutHeaderSpacing>
                     <span>Remove</span>
-                </div>
-            </div>
+                </CheckoutHeaderSpacing>
+            </CheckoutPageHeader>
             {
                 cartItems.map(cartItem => (
                     <CheckoutItem cartItem={cartItem} key={cartItem} />
                 ))
             }
-            <div className="total">
+            <CheckoutPageTotal>
                 <span>TOTAL: ${total}</span>
-            </div>
+            </CheckoutPageTotal>
             <StripeCheckoutButton price={total} />
-        </div>
+        </CheckoutPageContainer>
     )
 }
 
