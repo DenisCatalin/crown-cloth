@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import {auth, createUserProfileDocument, /*addCollectionAndDocuments*/} from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions'
 import { createStructuredSelector } from 'reselect';
@@ -15,9 +15,17 @@ import CheckoutPage from './pages/checkout/checkout.component';
 // import { selectCollectionsForPreview } from './redux/shop/shop.selectors'
 
 const App = ({ setCurrentUser, currentUser }) => {
-  
-  useEffect(() => {
 
+  let displayNameUser = '';
+  const user = useSelector((currentUser) => {
+    const data = currentUser.user.currentUser;
+    if(data !== null) {
+      console.log(data.displayName);
+      displayNameUser = data.displayName;
+    }
+  });
+
+  useEffect(() => {
     auth.onAuthStateChanged(async userAuth => {
       if(userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -37,7 +45,7 @@ const App = ({ setCurrentUser, currentUser }) => {
 
   return (
     <Router>
-      <Header />
+      <Header displayName={displayNameUser}/>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/signin" render={() => currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />)} />
       <Route path="/shop" component={ShopPage} />
