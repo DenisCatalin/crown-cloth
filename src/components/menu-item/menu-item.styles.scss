@@ -8,6 +8,7 @@
     border: 1px solid black;
     margin: 0 7.5px 15px;
     overflow: hidden;
+    animation: animation2 1s;
 
     &.large {
         height: 435px;
@@ -62,3 +63,14 @@
         }
     }
 }    
+
+@keyframes animation2 {
+    from{
+        transform: scale(0) rotateZ(50deg) rotateX(250deg);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}

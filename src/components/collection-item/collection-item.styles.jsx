@@ -1,4 +1,15 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+
+const animate = keyframes`
+    from{
+        opacity: 0;
+        transform: rotateX(120deg);
+    }
+    to{
+        opacity: 1;
+        transform: none;
+    }
+`;
 
 export const CollectionItemContainer = styled.div`
     width: 22vw;
@@ -7,6 +18,7 @@ export const CollectionItemContainer = styled.div`
     height: 350px;
     align-items: center;
     position: relative;
+    animation: ${animate} 1s;
 `;
 
 export const CollectionItemImage = styled.div`

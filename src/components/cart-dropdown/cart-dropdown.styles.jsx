@@ -1,4 +1,15 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+
+const animate = keyframes`
+    from{  
+        transform: scale(0);
+        border-radius: 10%;
+    }
+    to{
+        transform: scale(1);
+        border-radius: none;
+    }
+`;
 
 export const CartDropDownContainer = styled.div`
     position: absolute;
@@ -12,6 +23,7 @@ export const CartDropDownContainer = styled.div`
     top: 90px;
     right: 40px;
     z-index: 5;
+    animation: ${animate} .5s;
 `;
 
 export const CartDropDownItems = styled.div`

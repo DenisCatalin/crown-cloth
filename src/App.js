@@ -20,7 +20,6 @@ const App = ({ setCurrentUser, currentUser }) => {
   const user = useSelector((currentUser) => {
     const data = currentUser.user.currentUser;
     if(data !== null) {
-      console.log(data.displayName);
       displayNameUser = data.displayName;
     }
   });
@@ -33,6 +32,7 @@ const App = ({ setCurrentUser, currentUser }) => {
         userRef.onSnapshot(snapShot => {
           setCurrentUser({
               id: snapShot.id,
+              user,
               ...snapShot.data()
           });
         });
@@ -41,7 +41,7 @@ const App = ({ setCurrentUser, currentUser }) => {
 
       // addCollectionAndDocuments('collections', collectionsArray.map(obj =>({ title, items }) => ({ title, items })));
     });
-  }, [setCurrentUser]);
+  }, [setCurrentUser, user]);
 
   return (
     <Router>
