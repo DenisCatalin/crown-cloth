@@ -19,6 +19,10 @@ export const CollectionItemContainer = styled.div`
     align-items: center;
     position: relative;
     animation: ${animate} 1s;
+
+    @media screen and (max-width: 800px) {
+        width: 40vw;
+    }
 `;
 
 export const CollectionItemImage = styled.div`

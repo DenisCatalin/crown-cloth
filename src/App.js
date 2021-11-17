@@ -1,4 +1,4 @@
-import './App.css';
+import { GlobalStyle } from './global.styles';
 import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
@@ -45,6 +45,7 @@ const App = ({ setCurrentUser, currentUser }) => {
 
   return (
     <Router>
+      <GlobalStyle />
       <Header displayName={displayNameUser}/>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/signin" render={() => currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />)} />
