@@ -27,7 +27,7 @@ export const CollectionItemContainer = styled.div`
 
 export const CollectionItemImage = styled.div`
     width: 100%;
-    height: 95%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
