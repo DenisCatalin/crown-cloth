@@ -12,7 +12,8 @@ import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Header from './components/header/header.component';
 import CheckoutPage from './pages/checkout/checkout.component';
-// import { selectCollectionsForPreview } from './redux/shop/shop.selectors'
+import ContactPage from './pages/contact/contact.component';
+// import { selectCollectionsForPreview } from './redux/shop/shop.selectors' test
 
 const App = ({ setCurrentUser, currentUser }) => {
 
@@ -50,6 +51,7 @@ const App = ({ setCurrentUser, currentUser }) => {
       <Route exact path="/" component={HomePage} />
       <Route exact path="/signin" render={() => currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />)} />
       <Route path="/shop" component={ShopPage} />
+      <Route path="/contact" component={ContactPage} />
       <Route exact path="/checkout" component={CheckoutPage} />
     </Router>
   )
