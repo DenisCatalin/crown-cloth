@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
+import { Link } from "react-router-dom";
 
 export const CollectionPreviewText = styled.span`
     font-size: 28px;
@@ -13,6 +14,18 @@ export const CollectionPreviewContainer = styled.div`
     @media screen and (max-width: 800px) {
         align-items: center;
     }
+`;
+
+const linkStyles = css`
+    font-weight: 100;
+
+    &:hover {
+        font-weight: bold;
+    }
+`;
+
+export const CollectionPreviewLink = styled(Link)`
+    ${linkStyles}
 `;
 
 export const CollectionPreviewPreview = styled.div`
